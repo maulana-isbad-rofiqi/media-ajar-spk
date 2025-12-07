@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar TOPSIS - Media SPK</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-dark bg-success shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-arrow-left me-2"></i> Menu Utama
+            </a>
+            <span class="navbar-text text-white">Modul TOPSIS</span>
+        </div>
+    </nav>
+
+    <div class="container mt-4 mb-5">
+        
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <h3 class="text-success fw-bold mb-3">Metode TOPSIS</h3>
+                <p><strong>Technique for Order of Preference by Similarity to Ideal Solution (TOPSIS)</strong> didasarkan pada konsep bahwa alternatif terpilih harus mempunyai jarak terpendek dari solusi ideal positif dan jarak terpanjang dari solusi ideal negatif.</p>
+                
+                <div class="step-box" style="border-left-color: #198754;">
+                    <h5>📝 Tahapan Utama:</h5>
+                    <ol class="mb-0 small">
+                        <li>Membuat Matriks Normalisasi (Pembagi = Akar Kuadrat Total Kuadrat).</li>
+                        <li>Matriks Terbobot (Y).</li>
+                        <li>Menentukan Solusi Ideal Positif (A+) & Negatif (A-).</li>
+                        <li>Hitung Jarak (D+ dan D-).</li>
+                        <li>Hitung Nilai Preferensi (V).</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white py-3">
+                <h5 class="mb-0 fw-bold text-success"><i class="fas fa-calculator"></i> Simulasi TOPSIS</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted small">Kasus: Pemilihan Karyawan Terbaik</p>
+                <div class="alert alert-success small">
+                    <strong>Kriteria:</strong><br>
+                    1. C1 = Disiplin (Benefit - Bobot 5)<br>
+                    2. C2 = Kesalahan Kerja (Cost - Bobot 3)
+                </div>
+
+                <div class="row g-2 mb-3">
+                    <div class="col-6">
+                        <label class="form-label fw-bold">Karyawan A</label>
+                        <input type="number" id="a1c1" class="form-control mb-2" placeholder="Disiplin (1-10)" value="8">
+                        <input type="number" id="a1c2" class="form-control" placeholder="Jml Salah" value="2">
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label fw-bold">Karyawan B</label>
+                        <input type="number" id="a2c1" class="form-control mb-2" placeholder="Disiplin (1-10)" value="6">
+                        <input type="number" id="a2c2" class="form-control" placeholder="Jml Salah" value="5">
+                    </div>
+                </div>
+
+                <button onclick="hitungTOPSIS()" class="btn btn-success w-100 fw-bold">
+                    <i class="fas fa-play"></i> Hitung Solusi Ideal
+                </button>
+
+                <div id="hasil-container" class="mt-4 d-none">
+                    <hr>
+                    
+                    <div class="step-box bg-white border shadow-sm">
+                        <h6 class="text-success fw-bold">1. Pembagi (Akar Kuadrat)</h6>
+                        <div id="log-pembagi" class="small text-muted font-monospace"></div>
+                    </div>
+
+                    <div class="step-box bg-white border shadow-sm">
+                        <h6 class="text-success fw-bold">2. Matriks Terbobot (Y)</h6>
+                        <div id="log-y" class="small text-muted font-monospace"></div>
+                    </div>
+
+                    <div class="step-box bg-white border shadow-sm">
+                        <h6 class="text-success fw-bold">3. Solusi Ideal (A+ dan A-)</h6>
+                        <div id="log-ideal" class="small text-muted font-monospace"></div>
+                    </div>
+
+                    <div class="step-box bg-white border shadow-sm">
+                        <h6 class="text-success fw-bold">4. Hasil Akhir (Preferensi V)</h6>
+                        <div id="log-hasil" class="small text-muted font-monospace"></div>
+                    </div>
+
+                    <div class="alert alert-dark text-center fw-bold" id="final-result"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function hitungTOPSIS() {
+            // Input
+            let a1c1 = parseFloat(document.getElementById('a1c1').value); // A Benefit
+            let a1c2 = parseFloat(document.getElementById('a1c2').value); // A Cost
+            let a2c1 = parseFloat(document.getElementById('a2c1').value); // B Benefit
+            let a2c2 = parseFloat(document.getElementById('a2c2').value); // B Cost
+
+            let w1 = 5; let w2 = 3;
+
+            // 1. Cari Pembagi (Akar dari jumlah kuadrat)
+            let pembagi1 = Math.sqrt(Math.pow(a1c1, 2) + Math.pow(a2c1, 2));
+            let pembagi2 = Math.sqrt(Math.pow(a1c2, 2) + Math.pow(a2c2, 2));
+
+            // 2. Normalisasi Terbobot (Y)
+            let y11 = (a1c1 / pembagi1) * w1;
+            let y21 = (a2c1 / pembagi1) * w1;
+            
+            let y12 = (a1c2 / pembagi2) * w2;
+            let y22 = (a2c2 / pembagi2) * w2;
+
+            // 3. Solusi Ideal Positif (A+) dan Negatif (A-)
+            // C1 adalah Benefit -> Max is Good
+            let y1_plus = Math.max(y11, y21);
+            let y1_min = Math.min(y11, y21);
+
+            // C2 adalah Cost -> Min is Good
+            let y2_plus = Math.min(y12, y22); // A+ cost cari yg kecil
+            let y2_min = Math.max(y12, y22);  // A- cost cari yg besar
+
+            // 4. Jarak (D+ dan D-)
+            let d1_plus = Math.sqrt(Math.pow(y11 - y1_plus, 2) + Math.pow(y12 - y2_plus, 2));
+            let d1_min  = Math.sqrt(Math.pow(y11 - y1_min, 2) + Math.pow(y12 - y2_min, 2));
+            
+            let d2_plus = Math.sqrt(Math.pow(y21 - y1_plus, 2) + Math.pow(y22 - y2_plus, 2));
+            let d2_min  = Math.sqrt(Math.pow(y21 - y1_min, 2) + Math.pow(y22 - y2_min, 2));
+
+            // 5. Preferensi (V) -> V = D- / (D- + D+)
+            let v1 = d1_min / (d1_min + d1_plus);
+            let v2 = d2_min / (d2_min + d2_plus);
+
+            // TAMPILKAN
+            document.getElementById('hasil-container').classList.remove('d-none');
+
+            document.getElementById('log-pembagi').innerHTML = 
+                `Pembagi C1 = √(${a1c1}² + ${a2c1}²) = ${pembagi1.toFixed(2)}<br>` +
+                `Pembagi C2 = √(${a1c2}² + ${a2c2}²) = ${pembagi2.toFixed(2)}`;
+
+            document.getElementById('log-y').innerHTML = 
+                `Y11 (A,C1) = (${a1c1}/${pembagi1.toFixed(1)}) * ${w1} = ${y11.toFixed(2)}<br>` +
+                `Y12 (A,C2) = (${a1c2}/${pembagi2.toFixed(1)}) * ${w2} = ${y12.toFixed(2)}<br>` +
+                `Y21 (B,C1) = (${a2c1}/${pembagi1.toFixed(1)}) * ${w1} = ${y21.toFixed(2)}<br>` +
+                `Y22 (B,C2) = (${a2c2}/${pembagi2.toFixed(1)}) * ${w2} = ${y22.toFixed(2)}`;
+
+            document.getElementById('log-ideal').innerHTML = 
+                `A+ (Ideal Positif) = [${y1_plus.toFixed(2)}, ${y2_plus.toFixed(2)}]<br>` +
+                `A- (Ideal Negatif) = [${y1_min.toFixed(2)}, ${y2_min.toFixed(2)}]`;
+
+            document.getElementById('log-hasil').innerHTML = 
+                `V1 (Karyawan A) = ${v1.toFixed(4)}<br>V2 (Karyawan B) = ${v2.toFixed(4)}`;
+
+            let pemenang = (v1 > v2) ? "Karyawan A" : "Karyawan B";
+            document.getElementById('final-result').innerText = `Rekomendasi: ${pemenang}`;
+        }
+    </script>
+</body>
+</html>
