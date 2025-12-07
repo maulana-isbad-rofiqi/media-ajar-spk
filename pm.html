@@ -3,121 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belajar Profile Matching - Media SPK</title>
+    <title>Modul Profile Matching</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-light">
+<body>
 
-    <nav class="navbar navbar-dark bg-info shadow-sm">
+    <nav class="navbar navbar-dark shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold text-white" href="index.html">
-                <i class="fas fa-arrow-left me-2"></i> Menu Utama
-            </a>
-            <span class="navbar-text text-white fw-bold">Modul Profile Matching</span>
+            <a class="navbar-brand" href="index.html"><i class="fas fa-arrow-left me-2"></i> Modul PM</a>
         </div>
     </nav>
 
-    <div class="container mt-4 mb-5">
-        
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-body">
-                <h3 class="text-info fw-bold mb-3">Metode Profile Matching</h3>
-                <p>Metode ini membandingkan <strong>Profil Individu</strong> dengan <strong>Profil Target (Standar)</strong> sehingga diketahui perbedaan kompetensinya (disebut <strong>GAP</strong>).</p>
-                
-                <div class="step-box" style="border-left-color: #0dcaf0;">
-                    <h5>📝 Rumus Kunci:</h5>
-                    <ul class="mb-0 small">
-                        <li><strong>Gap = Profil Karyawan - Profil Standar</strong></li>
-                        <li>Konversi Gap ke Bobot (Contoh: Gap 0 -> 5 Poin, Gap -1 -> 4 Poin).</li>
-                        <li>Hitung <strong>Core Factor (NCF)</strong>: Rata-rata aspek utama.</li>
-                        <li>Hitung <strong>Secondary Factor (NSF)</strong>: Rata-rata aspek pendukung.</li>
-                        <li>Nilai Total = (60% x NCF) + (40% x NSF).</li>
-                    </ul>
-                </div>
-            </div>
+    <div class="container my-4">
+        <div class="method-header" style="border-left-color: #0dcaf0;">
+            <h2 class="fw-bold mb-3"><i class="fas fa-users-cog text-info me-2"></i>Profile Matching</h2>
+            <p class="text-muted">Membandingkan Profil Individu dengan Profil Target (Standar) untuk mencari nilai GAP.</p>
         </div>
 
-        <div class="card border-0 shadow-sm">
-            <div class="card-header bg-white py-3">
-                <h5 class="mb-0 fw-bold text-info"><i class="fas fa-user-tie"></i> Simulasi Kompetensi IT</h5>
-            </div>
-            <div class="card-body">
-                <p class="text-muted small">Kasus: Seleksi Programmer (Target Nilai: 5)</p>
-                
-                <div class="table-responsive">
-                    <table class="table table-bordered text-center align-middle">
-                        <thead class="table-info">
-                            <tr>
-                                <th>Aspek Penilaian</th>
-                                <th>Jenis</th>
-                                <th>Target (Standar)</th>
-                                <th>Nilai Karyawan A</th>
-                            </tr>
-                        </thead>
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="step-card bg-white p-3 h-100">
+                    <h5 class="fw-bold mb-3">🛠️ Input Nilai Kandidat</h5>
+                    <table class="table table-bordered align-middle">
+                        <thead class="table-info"><tr><th>Aspek</th><th>Target</th><th>Nilai User</th></tr></thead>
                         <tbody>
-                            <tr>
-                                <td>Coding (PHP)</td>
-                                <td><span class="badge bg-primary">Core</span></td>
-                                <td>5</td>
-                                <td><input type="number" id="val1" class="form-control text-center" value="5"></td>
-                            </tr>
-                            <tr>
-                                <td>Database (SQL)</td>
-                                <td><span class="badge bg-primary">Core</span></td>
-                                <td>4</td>
-                                <td><input type="number" id="val2" class="form-control text-center" value="3"></td>
-                            </tr>
-                            <tr>
-                                <td>Teamwork</td>
-                                <td><span class="badge bg-secondary">Secondary</span></td>
-                                <td>4</td>
-                                <td><input type="number" id="val3" class="form-control text-center" value="4"></td>
-                            </tr>
-                            <tr>
-                                <td>Komunikasi</td>
-                                <td><span class="badge bg-secondary">Secondary</span></td>
-                                <td>3</td>
-                                <td><input type="number" id="val4" class="form-control text-center" value="3"></td>
-                            </tr>
+                            <tr><td>Coding (Core)</td><td class="text-center fw-bold">5</td><td><input type="number" id="val1" class="form-control text-center" value="5"></td></tr>
+                            <tr><td>SQL (Core)</td><td class="text-center fw-bold">4</td><td><input type="number" id="val2" class="form-control text-center" value="3"></td></tr>
+                            <tr><td>Teamwork (Sec)</td><td class="text-center fw-bold">4</td><td><input type="number" id="val3" class="form-control text-center" value="4"></td></tr>
+                            <tr><td>Komunikasi (Sec)</td><td class="text-center fw-bold">3</td><td><input type="number" id="val4" class="form-control text-center" value="3"></td></tr>
                         </tbody>
                     </table>
+                    <button onclick="hitungPM()" class="btn btn-info text-white w-100 rounded-pill fw-bold shadow">
+                        <i class="fas fa-search me-1"></i> Hitung GAP
+                    </button>
                 </div>
+            </div>
 
-                <button onclick="hitungPM()" class="btn btn-info text-white w-100 fw-bold">
-                    <i class="fas fa-search"></i> Hitung Gap & Nilai Akhir
-                </button>
-
-                <div id="hasil-container" class="mt-4 d-none">
-                    <hr>
-                    
-                    <div class="step-box bg-white border shadow-sm">
-                        <h6 class="text-info fw-bold">1. Perhitungan GAP & Bobot</h6>
-                        <table class="table table-sm table-striped small mb-0">
-                            <thead><tr><th>Aspek</th><th>Hitungan (User - Target)</th><th>Gap</th><th>Bobot Gap</th></tr></thead>
-                            <tbody id="tabel-gap"></tbody>
-                        </table>
+            <div class="col-lg-6">
+                <div id="hasil-container" class="d-none">
+                    <div class="step-card bg-white">
+                        <div class="step-header text-info">Analisis GAP & Bobot</div>
+                        <div class="p-3 table-responsive">
+                            <table class="table table-sm table-striped small mb-0">
+                                <thead><tr><th>Aspek</th><th>Gap</th><th>Bobot</th></tr></thead>
+                                <tbody id="tabel-gap"></tbody>
+                            </table>
+                        </div>
                     </div>
-
-                    <div class="step-box bg-white border shadow-sm">
-                        <h6 class="text-info fw-bold">2. Hitung Core & Secondary</h6>
-                        <div id="log-factors" class="small text-muted font-monospace"></div>
-                    </div>
-
-                    <div class="alert alert-info text-center fw-bold text-white" style="background-color: #0dcaf0;">
-                        <span id="final-score"></span>
-                    </div>
-
+                    <div id="final-result" class="result-badge mt-3" style="background: linear-gradient(135deg, #0dcaf0 0%, #0aa2c0 100%);"></div>
                 </div>
-
             </div>
         </div>
     </div>
 
     <script>
         function getBobotGap(gap) {
-            // Tabel Bobot Standar Profile Matching
             if (gap == 0) return 5;
             if (gap == 1) return 4.5;
             if (gap == -1) return 4;
@@ -131,51 +73,29 @@
         }
 
         function hitungPM() {
-            // Target Perusahaan
             let t1=5, t2=4, t3=4, t4=3;
-
-            // Input User
             let u1 = parseFloat(document.getElementById('val1').value);
             let u2 = parseFloat(document.getElementById('val2').value);
             let u3 = parseFloat(document.getElementById('val3').value);
             let u4 = parseFloat(document.getElementById('val4').value);
 
-            // 1. Hitung GAP
             let g1 = u1 - t1; let b1 = getBobotGap(g1);
             let g2 = u2 - t2; let b2 = getBobotGap(g2);
             let g3 = u3 - t3; let b3 = getBobotGap(g3);
             let g4 = u4 - t4; let b4 = getBobotGap(g4);
 
-            // 2. Hitung NCF (Core Factor: Aspek 1 & 2)
             let ncf = (b1 + b2) / 2;
-
-            // 3. Hitung NSF (Secondary Factor: Aspek 3 & 4)
             let nsf = (b3 + b4) / 2;
-
-            // 4. Nilai Total (Misal: Core 60%, Secondary 40%)
             let total = (0.6 * ncf) + (0.4 * nsf);
 
-            // TAMPILKAN
             document.getElementById('hasil-container').classList.remove('d-none');
-
-            // Tabel Gap
-            let htmlGap = `
-                <tr><td>Coding</td><td>${u1} - ${t1}</td><td>${g1}</td><td>${b1}</td></tr>
-                <tr><td>SQL</td><td>${u2} - ${t2}</td><td>${g2}</td><td>${b2}</td></tr>
-                <tr><td>Teamwork</td><td>${u3} - ${t3}</td><td>${g3}</td><td>${b3}</td></tr>
-                <tr><td>Komunikasi</td><td>${u4} - ${t4}</td><td>${g4}</td><td>${b4}</td></tr>
+            document.getElementById('tabel-gap').innerHTML = `
+                <tr><td>Coding</td><td>${g1}</td><td>${b1}</td></tr>
+                <tr><td>SQL</td><td>${g2}</td><td>${b2}</td></tr>
+                <tr><td>Teamwork</td><td>${g3}</td><td>${b3}</td></tr>
+                <tr><td>Komunikasi</td><td>${g4}</td><td>${b4}</td></tr>
             `;
-            document.getElementById('tabel-gap').innerHTML = htmlGap;
-
-            // Log Factor
-            document.getElementById('log-factors').innerHTML = 
-                `NCF (Rata2 Core) = (${b1}+${b2})/2 = <strong>${ncf}</strong><br>` +
-                `NSF (Rata2 Secondary) = (${b3}+${b4})/2 = <strong>${nsf}</strong><br>` +
-                `Rumus: (60% x NCF) + (40% x NSF)`;
-
-            // Final
-            document.getElementById('final-score').innerText = 
-                `Nilai Akhir Profile Matching: ${total.toFixed(2)}`;
+            document.getElementById('final-result').innerText = `Nilai Akhir: ${total.toFixed(2)}`;
         }
     </script>
 </body>
