@@ -3,129 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belajar WP - Media SPK</title>
+    <title>Modul WP</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-light">
+<body>
 
-    <nav class="navbar navbar-dark bg-secondary shadow-sm">
+    <nav class="navbar navbar-dark shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">
-                <i class="fas fa-arrow-left me-2"></i> Menu Utama
-            </a>
-            <span class="navbar-text text-white">Modul WP</span>
+            <a class="navbar-brand" href="index.html"><i class="fas fa-arrow-left me-2"></i> Modul WP</a>
         </div>
     </nav>
 
-    <div class="container mt-4 mb-5">
-        
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-body">
-                <h3 class="text-secondary fw-bold mb-3">Metode Weighted Product (WP)</h3>
-                <p>Berbeda dengan SAW yang menjumlahkan, metode <strong>WP menggunakan perkalian</strong> untuk menghubungkan rating atribut, dimana rating setiap atribut harus <strong>dipangkatkan</strong> dulu dengan bobot atribut yang bersangkutan.</p>
-                
-                <div class="step-box" style="border-left-color: #6c757d;">
-                    <h5>📝 Rumus Kunci:</h5>
-                    <ul class="mb-0">
-                        <li><strong>Pangkat Positif (+):</strong> Jika Kriteria Keuntungan (Benefit).</li>
-                        <li><strong>Pangkat Negatif (-):</strong> Jika Kriteria Biaya (Cost).</li>
-                        <li><span class="formula">S = (Nilai^Bobot) * (Nilai^Bobot)...</span></li>
-                    </ul>
-                </div>
-            </div>
+    <div class="container my-4">
+        <div class="method-header" style="border-left-color: #198754;">
+            <h2 class="fw-bold mb-3"><i class="fas fa-bolt text-success me-2"></i>Weighted Product</h2>
+            <p class="text-muted">Metode ini menggunakan perkalian untuk menghubungkan rating atribut, dimana rating setiap atribut harus dipangkatkan dulu dengan bobotnya.</p>
+            <div class="formula-box" style="border-left-color: #198754; background: #f0fff4;">S = (Nilai^Bobot) * (Nilai^Bobot)...</div>
         </div>
 
-        <div class="card border-0 shadow-sm">
-            <div class="card-header bg-white py-3">
-                <h5 class="mb-0 fw-bold text-secondary"><i class="fas fa-calculator"></i> Simulasi WP</h5>
-            </div>
-            <div class="card-body">
-                <p class="text-muted small">Kasus: Memilih Lokasi Gudang (A vs B)</p>
-                <div class="alert alert-secondary small">
-                    <strong>Kriteria & Bobot:</strong><br>
-                    1. C1 = Jarak (Cost - Bobot 3) -> Diubah jadi -3<br>
-                    2. C2 = Luas (Benefit - Bobot 4) -> Diubah jadi +4
-                </div>
-
-                <div class="row g-2 mb-3">
-                    <div class="col-6">
-                        <label class="form-label fw-bold">Lokasi A</label>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="step-card bg-white p-3 h-100">
+                    <h5 class="fw-bold mb-3">🛠️ Input Data</h5>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Lokasi A</label>
                         <input type="number" id="a1c1" class="form-control mb-2" placeholder="Jarak (km)" value="10">
                         <input type="number" id="a1c2" class="form-control" placeholder="Luas (m2)" value="100">
                     </div>
-                    <div class="col-6">
-                        <label class="form-label fw-bold">Lokasi B</label>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Lokasi B</label>
                         <input type="number" id="a2c1" class="form-control mb-2" placeholder="Jarak (km)" value="50">
                         <input type="number" id="a2c2" class="form-control" placeholder="Luas (m2)" value="500">
                     </div>
+                    <button onclick="hitungWP()" class="btn btn-success w-100 rounded-pill fw-bold shadow">
+                        <i class="fas fa-calculator me-1"></i> Hitung WP
+                    </button>
                 </div>
+            </div>
 
-                <button onclick="hitungWP()" class="btn btn-secondary w-100 fw-bold">
-                    <i class="fas fa-bolt"></i> Hitung Vektor S & V
-                </button>
-
-                <div id="hasil-container" class="mt-4 d-none">
-                    <hr>
-                    <div class="step-box bg-white border shadow-sm">
-                        <h6 class="text-secondary fw-bold">Langkah 1: Menghitung Vektor S (Pangkat)</h6>
-                        <p class="small text-muted mb-1">Rumus: Nilai dipangkatkan bobot (Cost jadi minus)</p>
-                        <div id="log-vektor-s" class="small text-muted font-monospace"></div>
+            <div class="col-md-8">
+                <div id="hasil-container" class="d-none">
+                    <div class="step-card bg-white">
+                        <div class="step-header text-success">1. Vektor S (Pangkat)</div>
+                        <div class="p-3" id="log-vektor-s"></div>
                     </div>
-
-                    <div class="step-box bg-white border shadow-sm">
-                        <h6 class="text-secondary fw-bold">Langkah 2: Menghitung Vektor V (Preferensi)</h6>
-                        <p class="small text-muted mb-1">Rumus: Nilai S dibagi Total S</p>
-                        <div id="log-vektor-v" class="small text-muted font-monospace"></div>
+                    <div class="step-card bg-white">
+                        <div class="step-header text-success">2. Vektor V (Preferensi)</div>
+                        <div class="p-3" id="log-vektor-v"></div>
                     </div>
-
-                    <div class="alert alert-dark text-center fw-bold" id="final-result"></div>
+                    <div id="final-result" class="result-badge mt-3" style="background: linear-gradient(135deg, #198754 0%, #20c997 100%);"></div>
                 </div>
-
             </div>
         </div>
     </div>
 
     <script>
         function hitungWP() {
-            // Input Data
             let a1c1 = parseFloat(document.getElementById('a1c1').value);
             let a1c2 = parseFloat(document.getElementById('a1c2').value);
             let a2c1 = parseFloat(document.getElementById('a2c1').value);
             let a2c2 = parseFloat(document.getElementById('a2c2').value);
 
-            // Bobot (W)
-            // C1 Cost (3) jadi -3, C2 Benefit (4) jadi 4
-            let w1 = -3; 
-            let w2 = 4;
+            let w1 = -3; let w2 = 4; // Cost negatif, Benefit positif
 
-            // 1. Hitung Vektor S (Perkalian Pangkat)
-            // Lokasi A
             let s1 = Math.pow(a1c1, w1) * Math.pow(a1c2, w2);
-            // Lokasi B
             let s2 = Math.pow(a2c1, w1) * Math.pow(a2c2, w2);
-            
-            // Total S untuk pembagi
             let totalS = s1 + s2;
-
-            // 2. Hitung Vektor V (S / Total S)
             let v1 = s1 / totalS;
             let v2 = s2 / totalS;
 
-            // Tampilkan
             document.getElementById('hasil-container').classList.remove('d-none');
             
             document.getElementById('log-vektor-s').innerHTML = 
-                `S1 (Lokasi A) = (${a1c1}^${w1}) * (${a1c2}^${w2}) = <strong>${s1.toExponential(4)}</strong><br>` +
-                `S2 (Lokasi B) = (${a2c1}^${w1}) * (${a2c2}^${w2}) = <strong>${s2.toExponential(4)}</strong>`;
+                `<p class="mb-1">S1 = (${a1c1}<sup>${w1}</sup>) * (${a1c2}<sup>${w2}</sup>) = <b>${s1.toExponential(4)}</b></p>
+                 <p class="mb-0">S2 = (${a2c1}<sup>${w1}</sup>) * (${a2c2}<sup>${w2}</sup>) = <b>${s2.toExponential(4)}</b></p>`;
 
             document.getElementById('log-vektor-v').innerHTML = 
-                `V1 = ${s1.toExponential(2)} / ${totalS.toExponential(2)} = <strong>${v1.toFixed(4)}</strong><br>` +
-                `V2 = ${s2.toExponential(2)} / ${totalS.toExponential(2)} = <strong>${v2.toFixed(4)}</strong>`;
+                `<p class="mb-1">V1 = ${v1.toFixed(4)}</p><p class="mb-0">V2 = ${v2.toFixed(4)}</p>`;
 
             let pemenang = (v1 > v2) ? "Lokasi A" : "Lokasi B";
-            document.getElementById('final-result').innerText = `Pilihan Terbaik: ${pemenang}`;
+            document.getElementById('final-result').innerHTML = `Pilihan Terbaik: <strong>${pemenang}</strong>`;
         }
     </script>
 </body>
