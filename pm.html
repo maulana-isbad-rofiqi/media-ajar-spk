@@ -3,61 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modul Profile Matching</title>
+    <title>Modul Profile Matching - Profesional</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3067/3067260.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav class="navbar navbar-dark shadow-sm">
+    <nav class="navbar glass-nav sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="index.html"><i class="fas fa-arrow-left me-2"></i> Modul PM</a>
+            <a class="navbar-brand fw-bold text-white" href="index.html">
+                <i class="fas fa-chevron-left me-2"></i> Kembali
+            </a>
+            <span class="text-white fw-bold">Modul Profile Matching</span>
         </div>
     </nav>
 
-    <div class="container my-4">
-        <div class="method-header" style="border-left-color: #0dcaf0;">
-            <h2 class="fw-bold mb-3"><i class="fas fa-users-cog text-info me-2"></i>Profile Matching</h2>
-            <p class="text-muted">Membandingkan Profil Individu dengan Profil Target (Standar) untuk mencari nilai GAP.</p>
-        </div>
-
+    <div class="container my-5">
         <div class="row">
-            <div class="col-lg-6 mb-4">
-                <div class="step-card bg-white p-3 h-100">
-                    <h5 class="fw-bold mb-3">🛠️ Input Nilai Kandidat</h5>
-                    <table class="table table-bordered align-middle">
-                        <thead class="table-info"><tr><th>Aspek</th><th>Target</th><th>Nilai User</th></tr></thead>
-                        <tbody>
-                            <tr><td>Coding (Core)</td><td class="text-center fw-bold">5</td><td><input type="number" id="val1" class="form-control text-center" value="5"></td></tr>
-                            <tr><td>SQL (Core)</td><td class="text-center fw-bold">4</td><td><input type="number" id="val2" class="form-control text-center" value="3"></td></tr>
-                            <tr><td>Teamwork (Sec)</td><td class="text-center fw-bold">4</td><td><input type="number" id="val3" class="form-control text-center" value="4"></td></tr>
-                            <tr><td>Komunikasi (Sec)</td><td class="text-center fw-bold">3</td><td><input type="number" id="val4" class="form-control text-center" value="3"></td></tr>
-                        </tbody>
-                    </table>
-                    <button onclick="hitungPM()" class="btn btn-info text-white w-100 rounded-pill fw-bold shadow">
-                        <i class="fas fa-search me-1"></i> Hitung GAP
-                    </button>
+            <div class="col-lg-5 mb-4">
+                <div class="glass-card p-4 border-info">
+                    <h5 class="fw-bold mb-4 text-white"><i class="fas fa-id-card me-2 text-info"></i>Kompetensi Kandidat</h5>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between text-white-50 small mb-1">
+                            <span>Coding (Core - Target 5)</span>
+                        </div>
+                        <input type="number" id="val1" class="form-control glass-input" value="5">
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between text-white-50 small mb-1">
+                            <span>SQL (Core - Target 4)</span>
+                        </div>
+                        <input type="number" id="val2" class="form-control glass-input" value="3">
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between text-white-50 small mb-1">
+                            <span>Teamwork (Sec - Target 4)</span>
+                        </div>
+                        <input type="number" id="val3" class="form-control glass-input" value="4">
+                    </div>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between text-white-50 small mb-1">
+                            <span>Komunikasi (Sec - Target 3)</span>
+                        </div>
+                        <input type="number" id="val4" class="form-control glass-input" value="3">
+                    </div>
+
+                    <div class="d-grid">
+                        <button onclick="hitungPM()" class="btn btn-info btn-lg fw-bold text-white shadow-lg">
+                            <i class="fas fa-search me-2"></i>Analisis GAP
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-lg-6">
-                <div id="hasil-container" class="d-none">
-                    <div class="step-card bg-white">
-                        <div class="step-header text-info">Analisis GAP & Bobot</div>
-                        <div class="p-3 table-responsive">
-                            <table class="table table-sm table-striped small mb-0">
-                                <thead><tr><th>Aspek</th><th>Gap</th><th>Bobot</th></tr></thead>
+            <div class="col-lg-7">
+                <div id="placeholder" class="glass-card p-5 text-center text-white-50">
+                    <i class="fas fa-user-clock fa-4x mb-3 opacity-25"></i>
+                    <h4>Menunggu Input</h4>
+                    <p>Hitung selisih (GAP) kompetensi karyawan.</p>
+                </div>
+
+                <div id="hasil-container" class="d-none animate__animated animate__fadeIn">
+                    <div class="glass-card p-0 overflow-hidden mb-3">
+                        <div class="p-3 bg-white bg-opacity-10 fw-bold text-white">Rincian GAP & Bobot</div>
+                        <div class="p-3">
+                            <table class="table table-dark table-sm table-borderless small mb-0">
+                                <thead><tr class="text-info"><th>Aspek</th><th>Selisih (Gap)</th><th>Bobot Konversi</th></tr></thead>
                                 <tbody id="tabel-gap"></tbody>
                             </table>
                         </div>
                     </div>
-                    <div id="final-result" class="result-badge mt-3" style="background: linear-gradient(135deg, #0dcaf0 0%, #0aa2c0 100%);"></div>
+
+                    <div class="glass-card p-3 mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-white-50">Core Factor (60%)</span>
+                            <span class="fw-bold text-info" id="val-ncf"></span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-white-50">Secondary Factor (40%)</span>
+                            <span class="fw-bold text-info" id="val-nsf"></span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-4 text-center border-info bg-info bg-opacity-10">
+                        <h6 class="text-uppercase text-info fw-bold ls-2">Nilai Akhir</h6>
+                        <h2 class="text-white display-6 fw-bold mt-2" id="final-result"></h2>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function getBobotGap(gap) {
             if (gap == 0) return 5;
@@ -73,29 +116,40 @@
         }
 
         function hitungPM() {
-            let t1=5, t2=4, t3=4, t4=3;
-            let u1 = parseFloat(document.getElementById('val1').value);
-            let u2 = parseFloat(document.getElementById('val2').value);
-            let u3 = parseFloat(document.getElementById('val3').value);
-            let u4 = parseFloat(document.getElementById('val4').value);
+            let btn = document.querySelector('button');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Menganalisis...';
+            btn.disabled = true;
 
-            let g1 = u1 - t1; let b1 = getBobotGap(g1);
-            let g2 = u2 - t2; let b2 = getBobotGap(g2);
-            let g3 = u3 - t3; let b3 = getBobotGap(g3);
-            let g4 = u4 - t4; let b4 = getBobotGap(g4);
+            setTimeout(() => {
+                let t1=5, t2=4, t3=4, t4=3;
+                let u1=parseFloat(document.getElementById('val1').value), u2=parseFloat(document.getElementById('val2').value);
+                let u3=parseFloat(document.getElementById('val3').value), u4=parseFloat(document.getElementById('val4').value);
 
-            let ncf = (b1 + b2) / 2;
-            let nsf = (b3 + b4) / 2;
-            let total = (0.6 * ncf) + (0.4 * nsf);
+                let g1=u1-t1, b1=getBobotGap(g1);
+                let g2=u2-t2, b2=getBobotGap(g2);
+                let g3=u3-t3, b3=getBobotGap(g3);
+                let g4=u4-t4, b4=getBobotGap(g4);
 
-            document.getElementById('hasil-container').classList.remove('d-none');
-            document.getElementById('tabel-gap').innerHTML = `
-                <tr><td>Coding</td><td>${g1}</td><td>${b1}</td></tr>
-                <tr><td>SQL</td><td>${g2}</td><td>${b2}</td></tr>
-                <tr><td>Teamwork</td><td>${g3}</td><td>${b3}</td></tr>
-                <tr><td>Komunikasi</td><td>${g4}</td><td>${b4}</td></tr>
-            `;
-            document.getElementById('final-result').innerText = `Nilai Akhir: ${total.toFixed(2)}`;
+                let ncf=(b1+b2)/2, nsf=(b3+b4)/2;
+                let total=(0.6*ncf)+(0.4*nsf);
+
+                document.getElementById('placeholder').classList.add('d-none');
+                document.getElementById('hasil-container').classList.remove('d-none');
+
+                document.getElementById('tabel-gap').innerHTML = `
+                    <tr><td>Coding</td><td>${g1}</td><td>${b1}</td></tr>
+                    <tr><td>SQL</td><td>${g2}</td><td>${b2}</td></tr>
+                    <tr><td>Teamwork</td><td>${g3}</td><td>${b3}</td></tr>
+                    <tr><td>Komunikasi</td><td>${g4}</td><td>${b4}</td></tr>`;
+                
+                document.getElementById('val-ncf').innerText = ncf;
+                document.getElementById('val-nsf').innerText = nsf;
+                document.getElementById('final-result').innerText = total.toFixed(2);
+
+                btn.innerHTML = '<i class="fas fa-search me-2"></i>Analisis GAP';
+                btn.disabled = false;
+                Swal.fire({ title: 'Selesai', text: `Skor Akhir: ${total.toFixed(2)}`, icon: 'info', background: '#1e293b', color: '#fff' });
+            }, 800);
         }
     </script>
 </body>
