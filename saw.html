@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar SAW - Media SPK</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-dark bg-primary shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-arrow-left me-2"></i> Kembali ke Menu
+            </a>
+            <span class="navbar-text text-white">Modul SAW</span>
+        </div>
+    </nav>
+
+    <div class="container mt-4 mb-5">
+        
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <h3 class="text-primary fw-bold mb-3">Apa itu Metode SAW?</h3>
+                <p>Metode <strong>Simple Additive Weighting (SAW)</strong> dikenal sebagai metode penjumlahan terbobot. Metode ini membutuhkan proses <strong>Normalisasi Matriks (R)</strong> keputusan ke suatu skala yang dapat diperbandingkan.</p>
+                
+                <div class="step-box">
+                    <h5>📝 Rumus Kunci:</h5>
+                    <ul class="mb-0">
+                        <li>Jika Kriteria <strong>Benefit</strong> (Keuntungan): <br><span class="formula">R = Nilai / Nilai Max</span></li>
+                        <li>Jika Kriteria <strong>Cost</strong> (Biaya): <br><span class="formula">R = Nilai Min / Nilai</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white py-3">
+                <h5 class="mb-0 fw-bold text-success"><i class="fas fa-calculator"></i> Simulasi Perhitungan</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted small">Kasus: Memilih Laptop Terbaik (A vs B)</p>
+                <div class="alert alert-warning small">
+                    <strong>Kriteria:</strong><br>
+                    1. C1 = Harga (Cost - Bobot 0.6)<br>
+                    2. C2 = RAM (Benefit - Bobot 0.4)
+                </div>
+
+                <div class="row g-2 mb-3">
+                    <div class="col-6">
+                        <label class="form-label fw-bold">Laptop A</label>
+                        <input type="number" id="a1c1" class="form-control mb-2" placeholder="Harga (Rp)" value="5000000">
+                        <input type="number" id="a1c2" class="form-control" placeholder="RAM (GB)" value="4">
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label fw-bold">Laptop B</label>
+                        <input type="number" id="a2c1" class="form-control mb-2" placeholder="Harga (Rp)" value="8000000">
+                        <input type="number" id="a2c2" class="form-control" placeholder="RAM (GB)" value="8">
+                    </div>
+                </div>
+
+                <button onclick="hitungSAW()" class="btn btn-primary w-100 fw-bold">
+                    <i class="fas fa-play"></i> Mulai Hitung
+                </button>
+
+                <div id="hasil-container" class="mt-4 d-none">
+                    <hr>
+                    <h5 class="fw-bold">Langkah-langkah Penyelesaian:</h5>
+                    
+                    <div class="step-box bg-white border shadow-sm">
+                        <h6 class="text-primary fw-bold">Langkah 1: Analisis Nilai Min/Max</h6>
+                        <div id="log-minmax" class="small text-muted font-monospace"></div>
+                    </div>
+
+                    <div class="step-box bg-white border shadow-sm">
+                        <h6 class="text-primary fw-bold">Langkah 2: Normalisasi Matriks (R)</h6>
+                        <div id="log-normalisasi" class="small text-muted font-monospace"></div>
+                    </div>
+
+                    <div class="step-box bg-white border shadow-sm">
+                        <h6 class="text-primary fw-bold">Langkah 3: Perankingan (V)</h6>
+                        <div id="log-ranking" class="small text-muted font-monospace"></div>
+                    </div>
+
+                    <div class="alert alert-success text-center fw-bold" id="final-result"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function hitungSAW() {
+            // Ambil Input
+            let a1c1 = parseFloat(document.getElementById('a1c1').value);
+            let a1c2 = parseFloat(document.getElementById('a1c2').value);
+            let a2c1 = parseFloat(document.getElementById('a2c1').value);
+            let a2c2 = parseFloat(document.getElementById('a2c2').value);
+
+            // LOGIKA SAW DIMULAI DISINI
+            
+            // 1. Cari Min/Max
+            // C1 adalah Cost (Harga) -> Cari Paling Murah (Min)
+            let minC1 = Math.min(a1c1, a2c1);
+            // C2 adalah Benefit (RAM) -> Cari Paling Besar (Max)
+            let maxC2 = Math.max(a1c2, a2c2);
+
+            // 2. Normalisasi
+            let r11 = minC1 / a1c1;
+            let r21 = minC1 / a2c1;
+            let r12 = a1c2 / maxC2;
+            let r22 = a2c2 / maxC2;
+
+            // 3. Perankingan (Bobot C1=0.6, C2=0.4)
+            let v1 = (0.6 * r11) + (0.4 * r12);
+            let v2 = (0.6 * r21) + (0.4 * r22);
+
+            // TAMPILKAN KE LAYAR
+            document.getElementById('hasil-container').classList.remove('d-none');
+
+            // Log MinMax
+            document.getElementById('log-minmax').innerHTML = 
+                `Min C1 (Harga) = ${minC1}<br>Max C2 (RAM) = ${maxC2}`;
+
+            // Log Normalisasi
+            document.getElementById('log-normalisasi').innerHTML = 
+                `R11 (A-Harga) = ${minC1}/${a1c1} = ${r11.toFixed(2)}<br>` +
+                `R21 (B-Harga) = ${minC1}/${a2c1} = ${r21.toFixed(2)}<br>` +
+                `R12 (A-RAM) = ${a1c2}/${maxC2} = ${r12.toFixed(2)}<br>` +
+                `R22 (B-RAM) = ${a2c2}/${maxC2} = ${r22.toFixed(2)}`;
+
+            // Log Ranking
+            document.getElementById('log-ranking').innerHTML = 
+                `V1 (Laptop A) = (0.6 * ${r11.toFixed(2)}) + (0.4 * ${r12.toFixed(2)}) = <strong>${v1.toFixed(3)}</strong><br>` +
+                `V2 (Laptop B) = (0.6 * ${r21.toFixed(2)}) + (0.4 * ${r22.toFixed(2)}) = <strong>${v2.toFixed(3)}</strong>`;
+
+            // Kesimpulan
+            let pemenang = (v1 > v2) ? "Laptop A" : "Laptop B";
+            document.getElementById('final-result').innerText = 
+                `Rekomendasi Terbaik: ${pemenang}`;
+        }
+    </script>
+</body>
+</html>
