@@ -3,107 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modul TOPSIS</title>
+    <title>Modul TOPSIS - Profesional</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3067/3067260.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav class="navbar navbar-dark shadow-sm">
+    <nav class="navbar glass-nav sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="index.html"><i class="fas fa-arrow-left me-2"></i> Modul TOPSIS</a>
+            <a class="navbar-brand fw-bold text-white" href="index.html">
+                <i class="fas fa-chevron-left me-2"></i> Kembali
+            </a>
+            <span class="text-white fw-bold">Modul TOPSIS</span>
         </div>
     </nav>
 
-    <div class="container my-4">
-        <div class="method-header" style="border-left-color: #fd7e14;">
-            <h2 class="fw-bold mb-3"><i class="fas fa-star text-warning me-2"></i>TOPSIS</h2>
-            <p class="text-muted">Mencari alternatif dengan jarak terpendek dari solusi ideal positif dan jarak terjauh dari solusi ideal negatif.</p>
-        </div>
-
+    <div class="container my-5">
         <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="step-card bg-white p-3 h-100">
-                    <h5 class="fw-bold mb-3">🛠️ Penilaian Karyawan</h5>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold">Karyawan A</label>
-                        <input type="number" id="a1c1" class="form-control mb-2" placeholder="Disiplin" value="8">
-                        <input type="number" id="a1c2" class="form-control" placeholder="Kesalahan" value="2">
+            <div class="col-lg-4 mb-4">
+                <div class="glass-card p-4 border-warning">
+                    <h5 class="fw-bold mb-4 text-white"><i class="fas fa-user-tie me-2 text-warning"></i>Data Karyawan</h5>
+                    
+                    <div class="mb-4">
+                        <label class="text-white-50 small mb-2">Karyawan A</label>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text bg-dark border-secondary text-white-50"><i class="fas fa-star"></i></span>
+                            <input type="number" id="a1c1" class="form-control glass-input" placeholder="Disiplin (1-10)" value="8">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text bg-dark border-secondary text-white-50"><i class="fas fa-exclamation-circle"></i></span>
+                            <input type="number" id="a1c2" class="form-control glass-input" placeholder="Kesalahan" value="2">
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold">Karyawan B</label>
-                        <input type="number" id="a2c1" class="form-control mb-2" placeholder="Disiplin" value="6">
-                        <input type="number" id="a2c2" class="form-control" placeholder="Kesalahan" value="5">
+
+                    <div class="mb-4">
+                        <label class="text-white-50 small mb-2">Karyawan B</label>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text bg-dark border-secondary text-white-50"><i class="fas fa-star"></i></span>
+                            <input type="number" id="a2c1" class="form-control glass-input" placeholder="Disiplin (1-10)" value="6">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text bg-dark border-secondary text-white-50"><i class="fas fa-exclamation-circle"></i></span>
+                            <input type="number" id="a2c2" class="form-control glass-input" placeholder="Kesalahan" value="5">
+                        </div>
                     </div>
-                    <button onclick="hitungTOPSIS()" class="btn btn-warning text-white w-100 rounded-pill fw-bold shadow">
-                        <i class="fas fa-play me-1"></i> Analisis TOPSIS
-                    </button>
+
+                    <div class="d-grid">
+                        <button onclick="hitungTOPSIS()" class="btn btn-warning btn-lg fw-bold text-dark shadow-lg">
+                            <i class="fas fa-layer-group me-2"></i>Analisis TOPSIS
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-md-8">
-                <div id="hasil-container" class="d-none">
-                    <div class="step-card bg-white">
-                        <div class="step-header text-warning">1. Matriks Terbobot (Y)</div>
-                        <div class="p-3 font-monospace small" id="log-y"></div>
+            <div class="col-lg-8">
+                <div id="placeholder" class="glass-card p-5 text-center text-white-50">
+                    <i class="fas fa-project-diagram fa-4x mb-3 opacity-25"></i>
+                    <h4>Menunggu Input</h4>
+                    <p>Mencari jarak solusi ideal positif & negatif.</p>
+                </div>
+
+                <div id="hasil-container" class="d-none animate__animated animate__fadeIn">
+                    <div class="accordion mb-4" id="accordionTOPSIS">
+                        <div class="glass-card mb-3 p-0 overflow-hidden">
+                            <button class="btn w-100 text-start text-white p-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#step1">
+                                1. Matriks Terbobot (Y)
+                            </button>
+                            <div id="step1" class="collapse show" data-bs-parent="#accordionTOPSIS">
+                                <div class="p-3 border-top border-secondary text-white-50 small" id="log-y"></div>
+                            </div>
+                        </div>
+
+                        <div class="glass-card mb-3 p-0 overflow-hidden">
+                            <button class="btn w-100 text-start text-white p-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#step2">
+                                2. Solusi Ideal (A+ & A-)
+                            </button>
+                            <div id="step2" class="collapse" data-bs-parent="#accordionTOPSIS">
+                                <div class="p-3 border-top border-secondary text-white-50 small" id="log-ideal"></div>
+                            </div>
+                        </div>
+
+                        <div class="glass-card mb-3 p-0 overflow-hidden">
+                            <button class="btn w-100 text-start text-white p-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#step3">
+                                3. Nilai Preferensi (V)
+                            </button>
+                            <div id="step3" class="collapse" data-bs-parent="#accordionTOPSIS">
+                                <div class="p-3 border-top border-secondary text-white-50 small" id="log-hasil"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="step-card bg-white">
-                        <div class="step-header text-warning">2. Solusi Ideal (A+ & A-)</div>
-                        <div class="p-3 font-monospace small" id="log-ideal"></div>
+
+                    <div class="glass-card p-4 text-center border-warning">
+                        <h6 class="text-uppercase text-warning fw-bold ls-2">Karyawan Terbaik</h6>
+                        <h2 class="text-white display-6 fw-bold mt-2" id="final-result"></h2>
                     </div>
-                    <div class="step-card bg-white">
-                        <div class="step-header text-warning">3. Nilai Preferensi (V)</div>
-                        <div class="p-3" id="log-hasil"></div>
-                    </div>
-                    <div id="final-result" class="result-badge mt-3" style="background: linear-gradient(135deg, #fd7e14 0%, #fcc419 100%);"></div>
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function hitungTOPSIS() {
-            let a1c1 = parseFloat(document.getElementById('a1c1').value); 
-            let a1c2 = parseFloat(document.getElementById('a1c2').value); 
-            let a2c1 = parseFloat(document.getElementById('a2c1').value); 
-            let a2c2 = parseFloat(document.getElementById('a2c2').value); 
+            let btn = document.querySelector('button');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Menganalisis...';
+            btn.disabled = true;
 
-            let w1 = 5; let w2 = 3;
-            let pembagi1 = Math.sqrt(Math.pow(a1c1, 2) + Math.pow(a2c1, 2));
-            let pembagi2 = Math.sqrt(Math.pow(a1c2, 2) + Math.pow(a2c2, 2));
+            setTimeout(() => {
+                let a1c1 = parseFloat(document.getElementById('a1c1').value); let w1 = 5;
+                let a1c2 = parseFloat(document.getElementById('a1c2').value); let w2 = 3;
+                let a2c1 = parseFloat(document.getElementById('a2c1').value);
+                let a2c2 = parseFloat(document.getElementById('a2c2').value);
 
-            let y11 = (a1c1 / pembagi1) * w1;
-            let y21 = (a2c1 / pembagi1) * w1;
-            let y12 = (a1c2 / pembagi2) * w2;
-            let y22 = (a2c2 / pembagi2) * w2;
+                let pembagi1 = Math.sqrt(Math.pow(a1c1, 2) + Math.pow(a2c1, 2));
+                let pembagi2 = Math.sqrt(Math.pow(a1c2, 2) + Math.pow(a2c2, 2));
 
-            let y1_plus = Math.max(y11, y21);
-            let y1_min = Math.min(y11, y21);
-            let y2_plus = Math.min(y12, y22); 
-            let y2_min = Math.max(y12, y22); 
+                let y11 = (a1c1 / pembagi1) * w1; let y21 = (a2c1 / pembagi1) * w1;
+                let y12 = (a1c2 / pembagi2) * w2; let y22 = (a2c2 / pembagi2) * w2;
 
-            let d1_plus = Math.sqrt(Math.pow(y11 - y1_plus, 2) + Math.pow(y12 - y2_plus, 2));
-            let d1_min  = Math.sqrt(Math.pow(y11 - y1_min, 2) + Math.pow(y12 - y2_min, 2));
-            let d2_plus = Math.sqrt(Math.pow(y21 - y1_plus, 2) + Math.pow(y22 - y2_plus, 2));
-            let d2_min  = Math.sqrt(Math.pow(y21 - y1_min, 2) + Math.pow(y22 - y2_min, 2));
+                let y1_plus = Math.max(y11, y21); let y1_min = Math.min(y11, y21);
+                let y2_plus = Math.min(y12, y22); let y2_min = Math.max(y12, y22);
 
-            let v1 = d1_min / (d1_min + d1_plus);
-            let v2 = d2_min / (d2_min + d2_plus);
+                let d1_plus = Math.sqrt(Math.pow(y11 - y1_plus, 2) + Math.pow(y12 - y2_plus, 2));
+                let d1_min  = Math.sqrt(Math.pow(y11 - y1_min, 2) + Math.pow(y12 - y2_min, 2));
+                let d2_plus = Math.sqrt(Math.pow(y21 - y1_plus, 2) + Math.pow(y22 - y2_plus, 2));
+                let d2_min  = Math.sqrt(Math.pow(y21 - y1_min, 2) + Math.pow(y22 - y2_min, 2));
 
-            document.getElementById('hasil-container').classList.remove('d-none');
+                let v1 = d1_min / (d1_min + d1_plus);
+                let v2 = d2_min / (d2_min + d2_plus);
 
-            document.getElementById('log-y').innerHTML = 
-                `Y11=${y11.toFixed(2)}, Y12=${y12.toFixed(2)} <br> Y21=${y21.toFixed(2)}, Y22=${y22.toFixed(2)}`;
+                document.getElementById('placeholder').classList.add('d-none');
+                document.getElementById('hasil-container').classList.remove('d-none');
 
-            document.getElementById('log-ideal').innerHTML = 
-                `A+ = [${y1_plus.toFixed(2)}, ${y2_plus.toFixed(2)}] <br> A- = [${y1_min.toFixed(2)}, ${y2_min.toFixed(2)}]`;
+                document.getElementById('log-y').innerHTML = `Matrix Y Normalisasi Terbobot: <br> Y11=${y11.toFixed(2)}, Y12=${y12.toFixed(2)}`;
+                document.getElementById('log-ideal').innerHTML = `Solusi Ideal Positif (A+): [${y1_plus.toFixed(2)}, ${y2_plus.toFixed(2)}]`;
+                document.getElementById('log-hasil').innerHTML = `V1 = <b>${v1.toFixed(4)}</b> <br> V2 = <b>${v2.toFixed(4)}</b>`;
 
-            document.getElementById('log-hasil').innerHTML = 
-                `V1 (A) = <b>${v1.toFixed(4)}</b> <br> V2 (B) = <b>${v2.toFixed(4)}</b>`;
-
-            let pemenang = (v1 > v2) ? "Karyawan A" : "Karyawan B";
-            document.getElementById('final-result').innerHTML = `Rekomendasi: <strong>${pemenang}</strong>`;
+                let pemenang = (v1 > v2) ? "Karyawan A" : "Karyawan B";
+                document.getElementById('final-result').innerText = pemenang;
+                
+                btn.innerHTML = '<i class="fas fa-layer-group me-2"></i>Analisis TOPSIS';
+                btn.disabled = false;
+                Swal.fire({ title: 'Selesai', text: `Karyawan terpilih: ${pemenang}`, icon: 'warning', background: '#1e293b', color: '#fff' });
+            }, 800);
         }
     </script>
 </body>
