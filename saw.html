@@ -3,115 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modul SAW</title>
+    <title>Modul SAW - Profesional</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3067/3067260.png" type="image/png">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav class="navbar navbar-dark shadow-sm">
+    <nav class="navbar glass-nav sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="index.html"><i class="fas fa-arrow-left me-2"></i> Modul SAW</a>
+            <a class="navbar-brand fw-bold text-white" href="index.html">
+                <i class="fas fa-chevron-left me-2"></i> Kembali
+            </a>
+            <span class="text-white fw-bold">Modul SAW</span>
         </div>
     </nav>
 
-    <div class="container my-4">
-        <div class="method-header">
-            <h2 class="fw-bold mb-3"><i class="fas fa-chart-simple text-primary me-2"></i>Simple Additive Weighting</h2>
-            <p class="text-muted">Metode penjumlahan terbobot. Konsep dasarnya adalah mencari penjumlahan terbobot dari rating kinerja pada setiap alternatif pada semua atribut.</p>
-            <div class="formula-box">R = Nilai / Max (Benefit) <br> R = Min / Nilai (Cost)</div>
-        </div>
-
+    <div class="container my-5">
         <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="step-card bg-white p-3 h-100">
-                    <h5 class="fw-bold mb-3">🛠️ Input Data Simulasi</h5>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold">Laptop A (Harga & RAM)</label>
+            <div class="col-lg-4 mb-4">
+                <div class="glass-card p-4">
+                    <h5 class="fw-bold mb-4 text-white"><i class="fas fa-sliders-h me-2"></i>Parameter Input</h5>
+                    
+                    <div class="mb-4">
+                        <label class="text-white-50 small mb-2">Alternatif 1 (Laptop A)</label>
                         <div class="input-group mb-2">
-                            <span class="input-group-text">Rp</span>
-                            <input type="number" id="a1c1" class="form-control" value="5000000">
+                            <span class="input-group-text bg-dark border-secondary text-white-50"><i class="fas fa-tag"></i></span>
+                            <input type="number" id="a1c1" class="form-control glass-input" placeholder="Harga" value="5000000">
                         </div>
                         <div class="input-group">
-                            <input type="number" id="a1c2" class="form-control" value="4">
-                            <span class="input-group-text">GB</span>
+                            <span class="input-group-text bg-dark border-secondary text-white-50"><i class="fas fa-memory"></i></span>
+                            <input type="number" id="a1c2" class="form-control glass-input" placeholder="RAM" value="4">
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold">Laptop B (Harga & RAM)</label>
+
+                    <div class="mb-4">
+                        <label class="text-white-50 small mb-2">Alternatif 2 (Laptop B)</label>
                         <div class="input-group mb-2">
-                            <span class="input-group-text">Rp</span>
-                            <input type="number" id="a2c1" class="form-control" value="8000000">
+                            <span class="input-group-text bg-dark border-secondary text-white-50"><i class="fas fa-tag"></i></span>
+                            <input type="number" id="a2c1" class="form-control glass-input" placeholder="Harga" value="8000000">
                         </div>
                         <div class="input-group">
-                            <input type="number" id="a2c2" class="form-control" value="8">
-                            <span class="input-group-text">GB</span>
+                            <span class="input-group-text bg-dark border-secondary text-white-50"><i class="fas fa-memory"></i></span>
+                            <input type="number" id="a2c2" class="form-control glass-input" placeholder="RAM" value="8">
                         </div>
                     </div>
-                    <button onclick="hitungSAW()" class="btn btn-primary w-100 rounded-pill fw-bold shadow">
-                        <i class="fas fa-play me-1"></i> Mulai Hitung
-                    </button>
+
+                    <div class="d-grid">
+                        <button onclick="hitungSAW()" class="btn btn-primary btn-lg fw-bold shadow-lg">
+                            <i class="fas fa-rocket me-2"></i>Proses Hitung
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-md-8">
-                <div id="hasil-container" class="d-none">
-                    <div class="step-card bg-white">
-                        <div class="step-header text-primary">1. Analisis & Normalisasi</div>
-                        <div class="p-3" id="log-normalisasi"></div>
-                    </div>
-                    <div class="step-card bg-white">
-                        <div class="step-header text-primary">2. Hasil Perankingan (V)</div>
-                        <div class="p-3" id="log-ranking"></div>
-                    </div>
-                    <div id="final-result" class="result-badge mt-3"></div>
+            <div class="col-lg-8">
+                <div id="placeholder" class="glass-card p-5 text-center text-white-50">
+                    <i class="fas fa-robot fa-4x mb-3 opacity-25"></i>
+                    <h4>Siap Menganalisis</h4>
+                    <p>Masukkan data di sebelah kiri lalu klik tombol proses.</p>
                 </div>
-                
-                <div id="placeholder" class="text-center py-5 text-muted">
-                    <i class="fas fa-calculator fa-3x mb-3 opacity-25"></i>
-                    <p>Klik tombol "Mulai Hitung" untuk melihat hasil simulasi.</p>
+
+                <div id="hasil-container" class="d-none animate__animated animate__fadeIn">
+                    
+                    <div class="accordion mb-4" id="accordionSAW">
+                        
+                        <div class="glass-card mb-3 p-0 overflow-hidden">
+                            <button class="btn w-100 text-start text-white p-3 fw-bold d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#step1">
+                                <span>1. Menentukan Min/Max (Analisis Kriteria)</span> <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div id="step1" class="collapse show" data-bs-parent="#accordionSAW">
+                                <div class="p-3 border-top border-secondary text-white-50 small" id="log-minmax"></div>
+                            </div>
+                        </div>
+
+                        <div class="glass-card mb-3 p-0 overflow-hidden">
+                            <button class="btn w-100 text-start text-white p-3 fw-bold d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#step2">
+                                <span>2. Normalisasi Matriks (R)</span> <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div id="step2" class="collapse" data-bs-parent="#accordionSAW">
+                                <div class="p-3 border-top border-secondary text-white-50 small" id="log-normalisasi"></div>
+                            </div>
+                        </div>
+
+                        <div class="glass-card mb-3 p-0 overflow-hidden">
+                            <button class="btn w-100 text-start text-white p-3 fw-bold d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#step3">
+                                <span>3. Perankingan & Preferensi (V)</span> <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div id="step3" class="collapse" data-bs-parent="#accordionSAW">
+                                <div class="p-3 border-top border-secondary text-white-50 small" id="log-ranking"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="glass-card p-4 text-center border-success">
+                        <h6 class="text-uppercase text-success fw-bold ls-2">Rekomendasi Terbaik</h6>
+                        <h2 class="text-white display-6 fw-bold mt-2" id="final-result"></h2>
+                        <div class="progress mt-3" style="height: 6px; background: rgba(255,255,255,0.1);">
+                            <div class="progress-bar bg-success" id="progress-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(angka);
+        }
+
         function hitungSAW() {
-            let a1c1 = parseFloat(document.getElementById('a1c1').value);
-            let a1c2 = parseFloat(document.getElementById('a1c2').value);
-            let a2c1 = parseFloat(document.getElementById('a2c1').value);
-            let a2c2 = parseFloat(document.getElementById('a2c2').value);
+            // Simulasi Loading
+            let btn = document.querySelector('button');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Menghitung...';
+            btn.disabled = true;
 
-            let minC1 = Math.min(a1c1, a2c1);
-            let maxC2 = Math.max(a1c2, a2c2);
+            setTimeout(() => {
+                // Logika Hitung
+                let a1c1 = parseFloat(document.getElementById('a1c1').value);
+                let a1c2 = parseFloat(document.getElementById('a1c2').value);
+                let a2c1 = parseFloat(document.getElementById('a2c1').value);
+                let a2c2 = parseFloat(document.getElementById('a2c2').value);
 
-            let r11 = minC1 / a1c1;
-            let r21 = minC1 / a2c1;
-            let r12 = a1c2 / maxC2;
-            let r22 = a2c2 / maxC2;
+                let minC1 = Math.min(a1c1, a2c1);
+                let maxC2 = Math.max(a1c2, a2c2);
 
-            let v1 = (0.6 * r11) + (0.4 * r12);
-            let v2 = (0.6 * r21) + (0.4 * r22);
+                let r11 = minC1 / a1c1;
+                let r21 = minC1 / a2c1;
+                let r12 = a1c2 / maxC2;
+                let r22 = a2c2 / maxC2;
 
-            document.getElementById('placeholder').classList.add('d-none');
-            document.getElementById('hasil-container').classList.remove('d-none');
+                let v1 = (0.6 * r11) + (0.4 * r12);
+                let v2 = (0.6 * r21) + (0.4 * r22);
 
-            document.getElementById('log-normalisasi').innerHTML = 
-                `<table class="table table-sm table-bordered mb-0">
-                    <tr><th>Atribut</th><th>Laptop A</th><th>Laptop B</th></tr>
-                    <tr><td>Harga (Cost)</td><td>${minC1}/${a1c1} = <b>${r11.toFixed(2)}</b></td><td>${minC1}/${a2c1} = <b>${r21.toFixed(2)}</b></td></tr>
-                    <tr><td>RAM (Benefit)</td><td>${a1c2}/${maxC2} = <b>${r12.toFixed(2)}</b></td><td>${a2c2}/${maxC2} = <b>${r22.toFixed(2)}</b></td></tr>
-                </table>`;
+                // Tampilkan
+                document.getElementById('placeholder').classList.add('d-none');
+                document.getElementById('hasil-container').classList.remove('d-none');
 
-            document.getElementById('log-ranking').innerHTML = 
-                `<ul class="list-group list-group-flush">
-                    <li class="list-group-item">V1 (A) = (0.6 * ${r11.toFixed(2)}) + (0.4 * ${r12.toFixed(2)}) = <strong>${v1.toFixed(3)}</strong></li>
-                    <li class="list-group-item">V2 (B) = (0.6 * ${r21.toFixed(2)}) + (0.4 * ${r22.toFixed(2)}) = <strong>${v2.toFixed(3)}</strong></li>
-                </ul>`;
+                // Isi Log Detail
+                document.getElementById('log-minmax').innerHTML = `
+                    <div class="detail-box">
+                        <strong>Kriteria Harga (Cost):</strong> Dicari nilai terendah (Min). <br>
+                        Min(${formatRupiah(a1c1)}, ${formatRupiah(a2c1)}) = <span class="text-warning">${formatRupiah(minC1)}</span>
+                    </div>
+                    <div class="detail-box">
+                        <strong>Kriteria RAM (Benefit):</strong> Dicari nilai tertinggi (Max). <br>
+                        Max(${a1c2}GB, ${a2c2}GB) = <span class="text-warning">${maxC2}GB</span>
+                    </div>`;
 
-            let pemenang = (v1 > v2) ? "Laptop A" : "Laptop B";
-            document.getElementById('final-result').innerHTML = `Rekomendasi Terbaik: <strong>${pemenang}</strong>`;
+                document.getElementById('log-normalisasi').innerHTML = `
+                    <table class="table table-dark table-sm table-borderless small mb-0">
+                        <tr><td>R11 (A-Harga)</td><td>${minC1}/${a1c1}</td><td>= <span class="text-info">${r11.toFixed(3)}</span></td></tr>
+                        <tr><td>R12 (A-RAM)</td><td>${a1c2}/${maxC2}</td><td>= <span class="text-info">${r12.toFixed(3)}</span></td></tr>
+                        <tr><td colspan="3"><hr class="my-1"></td></tr>
+                        <tr><td>R21 (B-Harga)</td><td>${minC1}/${a2c1}</td><td>= <span class="text-info">${r21.toFixed(3)}</span></td></tr>
+                        <tr><td>R22 (B-RAM)</td><td>${a2c2}/${maxC2}</td><td>= <span class="text-info">${r22.toFixed(3)}</span></td></tr>
+                    </table>`;
+
+                document.getElementById('log-ranking').innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span>Nilai V1 (Laptop A)</span>
+                        <span class="fw-bold text-warning">${v1.toFixed(4)}</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>Nilai V2 (Laptop B)</span>
+                        <span class="fw-bold text-warning">${v2.toFixed(4)}</span>
+                    </div>`;
+
+                let pemenang = (v1 > v2) ? "Laptop A" : "Laptop B";
+                let skorMenang = Math.max(v1, v2) * 100; // Persen
+                
+                document.getElementById('final-result').innerText = pemenang;
+                document.getElementById('progress-bar').style.width = `${skorMenang}%`;
+
+                // Kembalikan Tombol & Notif Swal
+                btn.innerHTML = '<i class="fas fa-rocket me-2"></i>Proses Hitung';
+                btn.disabled = false;
+
+                Swal.fire({
+                    title: 'Selesai!',
+                    text: `Analisis selesai. Rekomendasi: ${pemenang}`,
+                    icon: 'success',
+                    background: '#1e293b',
+                    color: '#fff',
+                    confirmButtonColor: '#6366f1'
+                });
+
+            }, 800); // Delay 0.8 detik biar berasa "mikir"
         }
     </script>
 </body>
