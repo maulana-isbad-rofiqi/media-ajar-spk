@@ -3,120 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belajar AHP - Media SPK</title>
+    <title>Modul AHP</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-light">
+<body>
 
-    <nav class="navbar navbar-dark bg-danger shadow-sm">
+    <nav class="navbar navbar-dark shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">
-                <i class="fas fa-arrow-left me-2"></i> Menu Utama
-            </a>
-            <span class="navbar-text text-white">Modul AHP</span>
+            <a class="navbar-brand" href="index.html"><i class="fas fa-arrow-left me-2"></i> Modul AHP</a>
         </div>
     </nav>
 
-    <div class="container mt-4 mb-5">
-        
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-body">
-                <h3 class="text-danger fw-bold mb-3">Metode AHP</h3>
-                <p><strong>Analytic Hierarchy Process (AHP)</strong> dikembangkan oleh Thomas L. Saaty. AHP memecah masalah yang kompleks menjadi hirarki. Keunikan AHP adalah adanya uji <strong>Konsistensi (CR)</strong> untuk memastikan pengambilan keputusan tidak asal-asalan.</p>
-                
-                <div class="step-box" style="border-left-color: #dc3545;">
-                    <h5>📝 Tahapan Utama:</h5>
-                    <ol class="mb-0 small">
-                        <li>Membuat <strong>Matriks Perbandingan Berpasangan</strong>.</li>
-                        <li>Menghitung Normalisasi Matriks.</li>
-                        <li>Menghitung Bobot Prioritas (Eigen Vector).</li>
-                        <li>Uji Konsistensi (CI dan CR). Jika CR < 0.1 maka Valid.</li>
-                    </ol>
-                </div>
-            </div>
+    <div class="container my-4">
+        <div class="method-header" style="border-left-color: #dc3545;">
+            <h2 class="fw-bold mb-3"><i class="fas fa-sitemap text-danger me-2"></i>AHP</h2>
+            <p class="text-muted">Metode hirarki dengan uji Konsistensi (CR). Jika CR < 0.1 maka input valid.</p>
         </div>
 
-        <div class="card border-0 shadow-sm">
-            <div class="card-header bg-white py-3">
-                <h5 class="mb-0 fw-bold text-danger"><i class="fas fa-calculator"></i> Simulasi Matriks Kriteria</h5>
-            </div>
-            <div class="card-body">
-                <p class="text-muted small">Masukkan nilai perbandingan Skala Saaty (1-9).<br>Contoh: Jika Harga 3x lebih penting dari Kualitas, isi kolom [Harga vs Kualitas] dengan 3.</p>
-                
-                <div class="table-responsive">
-                    <table class="table table-bordered text-center align-middle">
-                        <thead class="table-danger">
-                            <tr>
-                                <th>Kriteria</th>
-                                <th>Harga</th>
-                                <th>Kualitas</th>
-                                <th>Layanan</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th class="bg-light">Harga</th>
-                                <td><input type="number" class="form-control text-center" value="1" disabled></td>
-                                <td><input type="number" id="k1_k2" class="form-control text-center bg-white" value="3" onchange="autoFill()"></td>
-                                <td><input type="number" id="k1_k3" class="form-control text-center bg-white" value="5" onchange="autoFill()"></td>
-                            </tr>
-                            <tr>
-                                <th class="bg-light">Kualitas</th>
-                                <td><input type="number" id="k2_k1" class="form-control text-center bg-light" value="0.33" disabled></td>
-                                <td><input type="number" class="form-control text-center" value="1" disabled></td>
-                                <td><input type="number" id="k2_k3" class="form-control text-center bg-white" value="3" onchange="autoFill()"></td>
-                            </tr>
-                            <tr>
-                                <th class="bg-light">Layanan</th>
-                                <td><input type="number" id="k3_k1" class="form-control text-center bg-light" value="0.2" disabled></td>
-                                <td><input type="number" id="k3_k2" class="form-control text-center bg-light" value="0.33" disabled></td>
-                                <td><input type="number" class="form-control text-center" value="1" disabled></td>
-                            </tr>
-                            <tr class="fw-bold bg-light">
-                                <th>TOTAL</th>
-                                <td id="tot_k1">0</td>
-                                <td id="tot_k2">0</td>
-                                <td id="tot_k3">0</td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <div class="row">
+            <div class="col-lg-12 mb-4">
+                <div class="step-card bg-white p-4">
+                    <h5 class="fw-bold mb-3 text-center">Matriks Perbandingan Berpasangan</h5>
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center align-middle">
+                            <thead class="table-danger">
+                                <tr><th>Kriteria</th><th>Harga</th><th>Kualitas</th><th>Layanan</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="bg-light">Harga</th>
+                                    <td><input type="text" class="form-control text-center bg-light" value="1" disabled></td>
+                                    <td><input type="number" id="k1_k2" class="form-control text-center" value="3" onchange="autoFill()"></td>
+                                    <td><input type="number" id="k1_k3" class="form-control text-center" value="5" onchange="autoFill()"></td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">Kualitas</th>
+                                    <td><input type="text" id="k2_k1" class="form-control text-center bg-light" value="0.33" disabled></td>
+                                    <td><input type="text" class="form-control text-center bg-light" value="1" disabled></td>
+                                    <td><input type="number" id="k2_k3" class="form-control text-center" value="3" onchange="autoFill()"></td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">Layanan</th>
+                                    <td><input type="text" id="k3_k1" class="form-control text-center bg-light" value="0.2" disabled></td>
+                                    <td><input type="text" id="k3_k2" class="form-control text-center bg-light" value="0.33" disabled></td>
+                                    <td><input type="text" class="form-control text-center bg-light" value="1" disabled></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button onclick="hitungAHP()" class="btn btn-danger w-100 rounded-pill fw-bold mt-3 shadow">
+                        <i class="fas fa-check-circle me-1"></i> Cek Konsistensi
+                    </button>
                 </div>
+            </div>
 
-                <button onclick="hitungAHP()" class="btn btn-danger w-100 fw-bold">
-                    <i class="fas fa-check-circle"></i> Cek Konsistensi & Bobot
-                </button>
-
-                <div id="hasil-container" class="mt-4 d-none">
-                    <hr>
-                    
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="step-box bg-white border shadow-sm">
-                                <h6 class="text-danger fw-bold">1. Bobot Prioritas (Eigen Vector)</h6>
-                                <ul class="list-group small" id="list-bobot">
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <div class="step-box bg-white border shadow-sm">
-                                <h6 class="text-danger fw-bold">2. Rasio Konsistensi (CR)</h6>
-                                <div id="log-cr" class="small font-monospace"></div>
-                                <div id="status-cr" class="alert mt-2 py-1 text-center fw-bold"></div>
-                            </div>
+            <div class="col-lg-12">
+                <div id="hasil-container" class="row d-none">
+                    <div class="col-md-6">
+                        <div class="step-card bg-white p-3">
+                            <h6 class="text-danger fw-bold">Bobot Prioritas</h6>
+                            <ul class="list-group list-group-flush" id="list-bobot"></ul>
                         </div>
                     </div>
-
+                    <div class="col-md-6">
+                        <div class="step-card bg-white p-3 text-center">
+                            <h6 class="text-danger fw-bold">Rasio Konsistensi (CR)</h6>
+                            <h2 id="nilai-cr" class="fw-bold my-3"></h2>
+                            <div id="status-cr"></div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
 
     <script>
-        // Fungsi agar kalau isi 3, lawannya otomatis jadi 1/3
         function autoFill() {
             let k1k2 = parseFloat(document.getElementById('k1_k2').value);
             let k1k3 = parseFloat(document.getElementById('k1_k3').value);
@@ -128,14 +91,12 @@
         }
 
         function hitungAHP() {
-            // 1. Ambil Data Matriks
             let mat = [
                 [1, parseFloat(document.getElementById('k1_k2').value), parseFloat(document.getElementById('k1_k3').value)],
                 [parseFloat(document.getElementById('k2_k1').value), 1, parseFloat(document.getElementById('k2_k3').value)],
                 [parseFloat(document.getElementById('k3_k1').value), parseFloat(document.getElementById('k3_k2').value), 1]
             ];
 
-            // 2. Hitung Total Kolom
             let totalCol = [0, 0, 0];
             for(let i=0; i<3; i++) {
                 for(let j=0; j<3; j++) {
@@ -143,64 +104,38 @@
                 }
             }
 
-            // Tampilkan Total di Tabel
-            document.getElementById('tot_k1').innerText = totalCol[0].toFixed(2);
-            document.getElementById('tot_k2').innerText = totalCol[1].toFixed(2);
-            document.getElementById('tot_k3').innerText = totalCol[2].toFixed(2);
-
-            // 3. Normalisasi & Hitung Eigen Vector (Bobot)
             let bobot = [0, 0, 0];
-            let normMat = [[0,0,0],[0,0,0],[0,0,0]];
-
             for(let i=0; i<3; i++) {
                 let sumBaris = 0;
                 for(let j=0; j<3; j++) {
-                    normMat[i][j] = mat[i][j] / totalCol[j]; // Membagi dengan total kolom
-                    sumBaris += normMat[i][j];
+                    sumBaris += mat[i][j] / totalCol[j];
                 }
-                bobot[i] = sumBaris / 3; // Rata-rata baris
+                bobot[i] = sumBaris / 3;
             }
 
-            // 4. Hitung Lambda Max (Untuk CR)
             let lambdaMax = 0;
             for(let i=0; i<3; i++) {
                 lambdaMax += totalCol[i] * bobot[i];
             }
 
-            // 5. Hitung CI dan CR
-            let n = 3;
-            let CI = (lambdaMax - n) / (n - 1);
-            let RI = 0.58; // Konstanta Index Random untuk Matrix 3x3
-            let CR = CI / RI;
+            let CI = (lambdaMax - 3) / 2;
+            let CR = CI / 0.58;
 
-            // TAMPILKAN HASIL
             document.getElementById('hasil-container').classList.remove('d-none');
-
-            // List Bobot
+            
             let htmlBobot = '';
             let kriteria = ['Harga', 'Kualitas', 'Layanan'];
             for(let i=0; i<3; i++) {
-                htmlBobot += `<li class="list-group-item d-flex justify-content-between align-items-center">
-                    ${kriteria[i]}
-                    <span class="badge bg-danger rounded-pill">${(bobot[i]*100).toFixed(1)}%</span>
-                </li>`;
+                htmlBobot += `<li class="list-group-item d-flex justify-content-between">${kriteria[i]} <span>${(bobot[i]*100).toFixed(1)}%</span></li>`;
             }
             document.getElementById('list-bobot').innerHTML = htmlBobot;
+            document.getElementById('nilai-cr').innerText = CR.toFixed(4);
 
-            // Log CR
-            document.getElementById('log-cr').innerHTML = 
-                `Lambda Max = ${lambdaMax.toFixed(4)}<br>` +
-                `CI = (${lambdaMax.toFixed(3)} - 3) / 2 = ${CI.toFixed(4)}<br>` +
-                `CR = ${CI.toFixed(4)} / 0.58 = <strong>${CR.toFixed(4)}</strong>`;
-
-            // Status CR
             let statusBox = document.getElementById('status-cr');
             if(CR < 0.1) {
-                statusBox.className = "alert mt-2 py-1 text-center fw-bold alert-success";
-                statusBox.innerHTML = "<i class='fas fa-check'></i> KONSISTEN (Valid)";
+                statusBox.innerHTML = '<span class="badge bg-success px-3 py-2">KONSISTEN (Valid)</span>';
             } else {
-                statusBox.className = "alert mt-2 py-1 text-center fw-bold alert-warning";
-                statusBox.innerHTML = "<i class='fas fa-exclamation-triangle'></i> TIDAK KONSISTEN (Cek Input)";
+                statusBox.innerHTML = '<span class="badge bg-danger px-3 py-2">TIDAK KONSISTEN</span>';
             }
         }
     </script>
