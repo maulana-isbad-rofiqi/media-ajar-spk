@@ -1,41 +1,141 @@
+/* Import Font Modern */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    --primary: #4e73df;
+    --secondary: #858796;
+    --success: #1cc88a;
+    --info: #36b9cc;
+    --warning: #f6c23e;
+    --danger: #e74a3b;
+    --dark: #2e303e;
+    --light: #f8f9fc;
+    --glass: rgba(255, 255, 255, 0.9);
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: var(--dark);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
+/* Navbar Keren */
+.navbar {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.navbar-brand {
+    color: var(--primary) !important;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Hero Section (Judul Besar) */
+.hero-section {
+    background: white;
+    padding: 3rem 1rem;
+    border-radius: 0 0 50px 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Kartu Menu (Glassmorphism) */
 .menu-card {
-    transition: all 0.3s ease;
-    cursor: pointer;
+    background: var(--glass);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 20px;
+    padding: 2rem 1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
 }
 
 .menu-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(78, 115, 223, 0.15) !important;
+    border-color: var(--primary);
 }
 
+/* Icon Bulat Keren */
 .icon-box {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
 }
 
+.menu-card:hover .icon-box {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Warna-warni Icon */
+.icon-saw { background: linear-gradient(45deg, #4e73df, #224abe); color: white; }
+.icon-wp { background: linear-gradient(45deg, #1cc88a, #13855c); color: white; }
+.icon-topsis { background: linear-gradient(45deg, #36b9cc, #258391); color: white; }
+.icon-ahp { background: linear-gradient(45deg, #e74a3b, #be2617); color: white; }
+.icon-pm { background: linear-gradient(45deg, #f6c23e, #dda20a); color: white; }
+
+/* Step Box (Kotak Penjelasan) */
 .step-box {
-    background-color: #f8f9fa;
-    border-left: 5px solid #0d6efd;
-    padding: 15px;
+    background: white;
+    border-left: 5px solid var(--primary);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
     margin-bottom: 20px;
-    border-radius: 0 5px 5px 0;
 }
 
+/* Formula Code */
 .formula {
-    background-color: #e2e3e5;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-family: monospace;
-    font-weight: bold;
+    background: #2e303e;
+    color: #00ff9d;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+/* Footer */
+footer {
+    background: white;
+    margin-top: auto;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.03);
+}
+
+/* Input Form */
+.form-control {
+    border-radius: 10px;
+    padding: 10px 15px;
+    border: 1px solid #e3e6f0;
+}
+.form-control:focus {
+    box-shadow: 0 0 0 3px rgba(78, 115, 223, 0.2);
+    border-color: var(--primary);
+}
+
+/* Tombol */
+.btn {
+    border-radius: 50px;
+    padding: 10px 25px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+}
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
